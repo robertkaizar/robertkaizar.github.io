@@ -8,12 +8,11 @@
 <style>
   :root{
     --ink: rgba(255,255,255,.96);
-    --muted: rgba(255,255,255,.74);
+    --muted: rgba(255,255,255,.72);
     --stroke: rgba(255,255,255,.10);
-
     --btnTop: rgba(22,40,70,.86);
-    --btnBot: rgba(10,18,32,.88);
-    --accent: rgba(120,180,255,.32);
+    --btnBot: rgba(10,18,32,.90);
+    --accent: rgba(120,180,255,.30);
   }
 
   *{box-sizing:border-box}
@@ -24,96 +23,91 @@
     color:var(--ink);
   }
 
-  /* Full-screen cinematic hero */
+  /* We control the entire layout to fit the viewport */
+  .page{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* SHORTER hero so buttons can fit without scrolling */
   .hero{
-    min-height:70vh;
     padding:
-      calc(20px + env(safe-area-inset-top))
-      20px
-      56px;
+      calc(14px + env(safe-area-inset-top))
+      18px
+      18px;
 
     background:
-      /* Controlled contrast — keeps text readable while preserving the photo */
       radial-gradient(900px 520px at 30% 20%, rgba(60,120,210,.18), rgba(0,0,0,0) 60%),
       linear-gradient(to bottom,
-        rgba(0,0,0,.72) 0%,
-        rgba(0,0,0,.46) 35%,
-        rgba(0,0,0,.68) 100%
+        rgba(0,0,0,.68) 0%,
+        rgba(0,0,0,.42) 40%,
+        rgba(0,0,0,.78) 100%
       ),
       url("hero.png");
-
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
+    /* Key: make hero compact */
+    flex: 0 0 auto;
   }
 
-  /* Brand header block */
   .brand{
-    max-width:420px;
-    text-shadow:0 10px 30px rgba(0,0,0,.55);
     display:flex;
-    gap:14px;
+    gap:12px;
     align-items:flex-start;
+    text-shadow:0 10px 30px rgba(0,0,0,.55);
+    max-width:420px;
   }
 
   .logo{
-    width:44px;height:44px;
+    width:40px;height:40px;
     border-radius:12px;
     background:rgba(255,255,255,.06);
     border:1px solid rgba(255,255,255,.10);
-    backdrop-filter: blur(6px);
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
     flex:0 0 auto;
   }
-  /* If you upload logo.png, it will display automatically */
-  .logo img{width:100%;height:100%;object-fit:cover}
-  .logo .fallback{
-    font-weight:900;
-    color:rgba(255,255,255,.78);
-    letter-spacing:.5px;
-  }
+  .logo .fallback{font-weight:900;color:rgba(255,255,255,.78);}
 
   .brand h1{
-    margin:0 0 8px;
-    font-size:24px;
+    margin:0 0 6px;
+    font-size:22px;
     letter-spacing:.9px;
     font-weight:950;
     text-transform:uppercase;
   }
-
   .brand p{
     margin:0;
-    font-size:13.5px;
-    line-height:1.55;
+    font-size:12.5px;
+    line-height:1.45;
     color:var(--muted);
   }
 
-  .nameblock{
-    margin-top:18px;
-  }
+  .nameblock{ margin-top:14px; }
   .nameblock h2{
     margin:0;
-    font-size:22px;
+    font-size:20px;
     font-weight:950;
   }
   .nameblock span{
     display:block;
-    margin-top:6px;
-    font-size:14px;
+    margin-top:5px;
+    font-size:13px;
     color:var(--muted);
   }
 
-  /* Button stack floats over the hero edge */
+  /* ACTIONS: tighter + auto fill remaining height */
   .actions{
-    padding:18px 18px 18px;
-    margin-top:-34px;
+    flex: 1 1 auto;
+    padding:14px 14px 10px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
   }
 
   a.btn{
@@ -123,30 +117,25 @@
     text-decoration:none;
     color:var(--ink);
 
-    padding:16px 16px;
-    margin-bottom:12px;
+    /* tighter buttons */
+    padding:14px 14px;
     border-radius:16px;
 
     background: linear-gradient(180deg, var(--btnTop), var(--btnBot));
     border:1px solid var(--stroke);
     box-shadow:
-      0 16px 44px rgba(0,0,0,.65),
-      inset 0 0 0 1px rgba(0,0,0,.24);
+      0 14px 36px rgba(0,0,0,.62),
+      inset 0 0 0 1px rgba(0,0,0,.22);
 
     font-weight:900;
     letter-spacing:.65px;
     text-transform:uppercase;
 
-    transition:transform .08s ease, border-color .12s ease, box-shadow .12s ease;
+    transition:transform .08s ease;
   }
   a.btn:active{ transform:scale(.985); }
 
-  a.btn.primary{
-    border-color: var(--accent);
-    box-shadow:
-      0 18px 52px rgba(0,0,0,.70),
-      inset 0 0 0 1px rgba(0,0,0,.28);
-  }
+  a.btn.primary{ border-color: var(--accent); }
 
   .small{
     font-size:12px;
@@ -156,29 +145,30 @@
     font-weight:750;
   }
 
+  /* Footer stays visible and compact */
   .footer{
+    flex:0 0 auto;
     text-align:center;
-    padding:14px 16px calc(18px + env(safe-area-inset-bottom));
-    font-size:12px;
-    color:rgba(255,255,255,.45);
+    padding:8px 14px calc(10px + env(safe-area-inset-bottom));
+    font-size:11.5px;
+    color:rgba(255,255,255,.42);
   }
 
-  @media (max-width: 360px){
-    .brand h1{font-size:22px}
+  /* If screen is very short, allow minimal scroll instead of breaking layout */
+  @media (max-height: 740px){
+    .brand h1{font-size:21px}
+    .actions{gap:9px}
+    a.btn{padding:13px 13px}
   }
 </style>
 </head>
 
 <body>
+<div class="page">
 
   <div class="hero">
     <div class="brand">
-      <div class="logo">
-        <!-- Upload logo.png to your repo to use it -->
-        <!-- <img src="logo.png" alt="Ruoff Logo"> -->
-        <span class="fallback">R</span>
-      </div>
-
+      <div class="logo"><span class="fallback">R</span></div>
       <div>
         <h1>RUOFF &amp; SONS</h1>
         <p>
@@ -197,28 +187,19 @@
 
   <div class="actions">
     <a class="btn primary" href="robert-kaizar.vcf" download>
-      <span>Save Contact</span>
-      <span class="small">.VCF</span>
+      <span>Save Contact</span><span class="small">.VCF</span>
     </a>
-
     <a class="btn" href="tel:+14435108233">
-      <span>Call Robert</span>
-      <span class="small">(443) 510-8233</span>
+      <span>Call Robert</span><span class="small">(443) 510-8233</span>
     </a>
-
     <a class="btn" href="mailto:robert@ruoffandsons.com">
-      <span>Email Robert</span>
-      <span class="small">robert@ruoffandsons.com</span>
+      <span>Email Robert</span><span class="small">robert@ruoffandsons.com</span>
     </a>
-
     <a class="btn" href="https://www.ruoffandsons.com" target="_blank" rel="noopener">
-      <span>Visit Website</span>
-      <span class="small">Open</span>
+      <span>Visit Website</span><span class="small">Open</span>
     </a>
-
     <a class="btn" href="https://www.linkedin.com/in/robert-kaizar-9321b630/" target="_blank" rel="noopener">
-      <span>Connect on LinkedIn</span>
-      <span class="small">Connect</span>
+      <span>Connect on LinkedIn</span><span class="small">Connect</span>
     </a>
   </div>
 
@@ -226,6 +207,7 @@
     Documented Process • Controlled Tolerances • On-Time Execution
   </div>
 
+</div>
 </body>
 </html>
 
