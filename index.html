@@ -6,169 +6,184 @@
 <title>Robert Kaizar | Ruoff & Sons</title>
 
 <style>
-  :root{
-    --ink: rgba(255,255,255,.96);
-    --muted: rgba(255,255,255,.72);
-    --stroke: rgba(255,255,255,.10);
-    --btnTop: rgba(22,40,70,.86);
-    --btnBot: rgba(10,18,32,.90);
-    --accent: rgba(120,180,255,.30);
-  }
+:root{
+  --ink: rgba(255,255,255,.96);
+  --muted: rgba(255,255,255,.72);
+  --stroke: rgba(255,255,255,.10);
+  --btnTop: rgba(22,40,70,.86);
+  --btnBot: rgba(10,18,32,.90);
+  --accent: rgba(120,180,255,.30);
+}
 
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
-    background:#03070d;
-    color:var(--ink);
-  }
+*{box-sizing:border-box}
 
-  /* We control the entire layout to fit the viewport */
-  .page{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-  }
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
+  background:#03070d;
+  color:var(--ink);
+}
 
-  /* SHORTER hero so buttons can fit without scrolling */
-  .hero{
-    padding:
-      calc(14px + env(safe-area-inset-top))
-      18px
-      18px;
+.page{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
 
-    background:
-      radial-gradient(900px 520px at 30% 20%, rgba(60,120,210,.18), rgba(0,0,0,0) 60%),
-      linear-gradient(to bottom,
-        rgba(0,0,0,.68) 0%,
-        rgba(0,0,0,.42) 40%,
-        rgba(0,0,0,.78) 100%
-      ),
-      url("hero.png");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+/* HERO TAKES EXTRA SPACE — NOT THE BUTTONS */
+.hero{
+  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
 
-    /* Key: make hero compact */
-    flex: 0 0 auto;
-  }
+  padding:
+    calc(18px + env(safe-area-inset-top))
+    20px
+    26px;
 
-  .brand{
-    display:flex;
-    gap:12px;
-    align-items:flex-start;
-    text-shadow:0 10px 30px rgba(0,0,0,.55);
-    max-width:420px;
-  }
+  background:
+    radial-gradient(900px 520px at 30% 20%, rgba(60,120,210,.18), rgba(0,0,0,0) 60%),
+    linear-gradient(to bottom,
+      rgba(0,0,0,.68) 0%,
+      rgba(0,0,0,.42) 40%,
+      rgba(0,0,0,.82) 100%
+    ),
+    url("hero.png");
 
-  .logo{
-    width:40px;height:40px;
-    border-radius:12px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.10);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    flex:0 0 auto;
-  }
-  .logo .fallback{font-weight:900;color:rgba(255,255,255,.78);}
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
 
-  .brand h1{
-    margin:0 0 6px;
-    font-size:22px;
-    letter-spacing:.9px;
-    font-weight:950;
-    text-transform:uppercase;
-  }
-  .brand p{
-    margin:0;
-    font-size:12.5px;
-    line-height:1.45;
-    color:var(--muted);
-  }
+/* BRAND BLOCK */
+.brand{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  max-width:420px;
+  text-shadow:0 10px 30px rgba(0,0,0,.55);
+}
 
-  .nameblock{ margin-top:14px; }
-  .nameblock h2{
-    margin:0;
-    font-size:20px;
-    font-weight:950;
-  }
-  .nameblock span{
-    display:block;
-    margin-top:5px;
-    font-size:13px;
-    color:var(--muted);
-  }
+.logo{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
 
-  /* ACTIONS: tighter + auto fill remaining height */
-  .actions{
-    flex: 1 1 auto;
-    padding:14px 14px 10px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
+.logo span{
+  font-weight:900;
+  color:rgba(255,255,255,.75);
+}
 
-  a.btn{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    text-decoration:none;
-    color:var(--ink);
+.brand h1{
+  margin:0 0 6px;
+  font-size:22px;
+  letter-spacing:.9px;
+  font-weight:900;
+  text-transform:uppercase;
+}
 
-    /* tighter buttons */
-    padding:14px 14px;
-    border-radius:16px;
+.brand p{
+  margin:0;
+  font-size:12.5px;
+  line-height:1.45;
+  color:var(--muted);
+}
 
-    background: linear-gradient(180deg, var(--btnTop), var(--btnBot));
-    border:1px solid var(--stroke);
-    box-shadow:
-      0 14px 36px rgba(0,0,0,.62),
-      inset 0 0 0 1px rgba(0,0,0,.22);
+.nameblock{
+  margin-top:14px;
+}
 
-    font-weight:900;
-    letter-spacing:.65px;
-    text-transform:uppercase;
+.nameblock h2{
+  margin:0;
+  font-size:20px;
+  font-weight:900;
+}
 
-    transition:transform .08s ease;
-  }
-  a.btn:active{ transform:scale(.985); }
+.nameblock span{
+  display:block;
+  margin-top:5px;
+  font-size:13px;
+  color:var(--muted);
+}
 
-  a.btn.primary{ border-color: var(--accent); }
+/* BUTTON STACK — DOES NOT STRETCH */
+.actions{
+  flex:0 0 auto;
+  padding:14px 16px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
 
-  .small{
-    font-size:12px;
-    letter-spacing:.2px;
-    color:rgba(255,255,255,.70);
-    text-transform:none;
-    font-weight:750;
-  }
+a.btn{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  text-decoration:none;
+  color:var(--ink);
 
-  /* Footer stays visible and compact */
-  .footer{
-    flex:0 0 auto;
-    text-align:center;
-    padding:8px 14px calc(10px + env(safe-area-inset-bottom));
-    font-size:11.5px;
-    color:rgba(255,255,255,.42);
-  }
+  padding:14px 16px;
+  border-radius:16px;
 
-  /* If screen is very short, allow minimal scroll instead of breaking layout */
-  @media (max-height: 740px){
-    .brand h1{font-size:21px}
-    .actions{gap:9px}
-    a.btn{padding:13px 13px}
-  }
+  background:linear-gradient(180deg,var(--btnTop),var(--btnBot));
+  border:1px solid var(--stroke);
+
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.65),
+    inset 0 0 0 1px rgba(0,0,0,.25);
+
+  font-weight:800;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+
+  transition:transform .08s ease;
+}
+
+a.btn:active{
+  transform:scale(.985);
+}
+
+a.btn.primary{
+  border-color:var(--accent);
+}
+
+.small{
+  font-size:12px;
+  color:rgba(255,255,255,.70);
+  text-transform:none;
+  font-weight:700;
+}
+
+.footer{
+  flex:0 0 auto;
+  text-align:center;
+  padding:
+    10px 16px
+    calc(16px + env(safe-area-inset-bottom));
+  font-size:11.5px;
+  color:rgba(255,255,255,.45);
+}
 </style>
 </head>
 
 <body>
+
 <div class="page">
 
   <div class="hero">
     <div class="brand">
-      <div class="logo"><span class="fallback">R</span></div>
+      <div class="logo">
+        <span>R</span>
+      </div>
+
       <div>
         <h1>RUOFF &amp; SONS</h1>
         <p>
@@ -186,21 +201,32 @@
   </div>
 
   <div class="actions">
+
     <a class="btn primary" href="robert-kaizar.vcf" download>
-      <span>Save Contact</span><span class="small">.VCF</span>
+      <span>Save Contact</span>
+      <span class="small">.VCF</span>
     </a>
+
     <a class="btn" href="tel:+14435108233">
-      <span>Call Robert</span><span class="small">(443) 510-8233</span>
+      <span>Call Robert</span>
+      <span class="small">(443) 510-8233</span>
     </a>
+
     <a class="btn" href="mailto:robert@ruoffandsons.com">
-      <span>Email Robert</span><span class="small">robert@ruoffandsons.com</span>
+      <span>Email Robert</span>
+      <span class="small">robert@ruoffandsons.com</span>
     </a>
-    <a class="btn" href="https://www.ruoffandsons.com" target="_blank" rel="noopener">
-      <span>Visit Website</span><span class="small">Open</span>
+
+    <a class="btn" href="https://www.ruoffandsons.com" target="_blank">
+      <span>Visit Website</span>
+      <span class="small">Open</span>
     </a>
-    <a class="btn" href="https://www.linkedin.com/in/robert-kaizar-9321b630/" target="_blank" rel="noopener">
-      <span>Connect on LinkedIn</span><span class="small">Connect</span>
+
+    <a class="btn" href="https://www.linkedin.com/in/robert-kaizar-9321b630/" target="_blank">
+      <span>Connect on LinkedIn</span>
+      <span class="small">Connect</span>
     </a>
+
   </div>
 
   <div class="footer">
@@ -208,6 +234,6 @@
   </div>
 
 </div>
+
 </body>
 </html>
-
