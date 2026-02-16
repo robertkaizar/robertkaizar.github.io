@@ -4,51 +4,254 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Robert Kaizar | Ruoff & Sons</title>
+
   <style>
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#0b1320;background:#eef2f7;}
-    .wrap{max-width:520px;margin:0 auto;padding:22px;}
-    .card{background:#ffffff;border-radius:14px;box-shadow:0 10px 28px rgba(0,0,0,.08);overflow:hidden;}
-    .hero{padding:28px 22px;background:linear-gradient(135deg,#0f2747,#2b4f77);color:#fff;}
-    .hero h1{margin:0 0 6px;font-size:20px;letter-spacing:.6px;}
-    .hero .sub{opacity:.9;font-size:13px;line-height:1.35;}
-    .who{padding:18px 22px 6px;}
-    .who .name{font-size:18px;font-weight:700;margin:0;}
-    .who .title{margin:4px 0 0;color:#536074;font-size:13px;}
-    .btns{padding:14px 22px 22px;display:grid;gap:10px;}
-    a.btn{display:flex;justify-content:space-between;align-items:center;text-decoration:none;
-      padding:14px 14px;border-radius:12px;border:1px solid #d7dde6;background:#f8fafc;color:#0b1320;font-weight:600;}
-    a.btn.primary{background:#0f2747;border-color:#0f2747;color:#fff;}
-    .meta{font-weight:600;opacity:.85;margin-left:10px;font-size:13px;}
-    .foot{padding:14px 22px 20px;color:#67748b;font-size:12px;border-top:1px solid #eef2f7;}
+    :root{
+      --ink:#f2f6ff;
+      --muted:rgba(242,246,255,.78);
+      --line:rgba(255,255,255,.14);
+      --panel:rgba(8,14,24,.55);
+      --panel2:rgba(8,14,24,.40);
+      --btn:rgba(14,22,35,.72);
+      --btn2:rgba(16,26,42,.86);
+      --accent:rgba(96,170,255,.35);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;
+      background:#070b12;
+      color:var(--ink);
+    }
+
+    /* Fullscreen hero background */
+    .bg{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px 14px;
+      background:
+        radial-gradient(1200px 800px at 50% 20%, rgba(40,90,160,.25), rgba(0,0,0,0) 55%),
+        linear-gradient(rgba(4,8,16,.78), rgba(4,8,16,.86)),
+        url("hero.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat:no-repeat;
+    }
+
+    /* Center “phone” column */
+    .wrap{
+      width:min(420px, 100%);
+    }
+
+    .top{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:10px 6px 0;
+      margin-bottom:10px;
+    }
+
+    /* Optional logo block (use your R mark file if you want) */
+    .logo{
+      width:42px;height:42px;
+      border-radius:10px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      display:flex;align-items:center;justify-content:center;
+      backdrop-filter: blur(6px);
+      overflow:hidden;
+    }
+    .logo img{width:100%;height:100%;object-fit:cover}
+
+    .brand h1{
+      font-size:20px;
+      line-height:1.05;
+      letter-spacing:.6px;
+      margin:0 0 6px 0;
+      font-weight:800;
+      text-transform:uppercase;
+      text-shadow:0 6px 18px rgba(0,0,0,.45);
+    }
+    .brand .sub{
+      font-size:12.5px;
+      line-height:1.45;
+      color:var(--muted);
+      margin:0;
+      text-shadow:0 6px 18px rgba(0,0,0,.45);
+    }
+
+    .card{
+      border-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(180deg, var(--panel), var(--panel2));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 50px rgba(0,0,0,.55);
+      backdrop-filter: blur(8px);
+    }
+
+    .who{
+      padding:18px 18px 8px;
+    }
+    .name{
+      font-size:22px;
+      margin:0;
+      font-weight:800;
+      text-shadow:0 6px 18px rgba(0,0,0,.45);
+    }
+    .title{
+      margin:6px 0 0 0;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .btns{
+      padding:16px 14px 16px;
+      display:grid;
+      gap:10px;
+    }
+
+    a.btn{
+      text-decoration:none;
+      color:var(--ink);
+      background:linear-gradient(180deg, rgba(18,28,45,.70), rgba(10,16,26,.70));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:12px;
+      padding:14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+      transition: transform .08s ease, border-color .12s ease, box-shadow .12s ease;
+    }
+    a.btn:active{ transform: scale(.99); }
+
+    /* Primary action: subtle pop */
+    a.btn.primary{
+      background:linear-gradient(180deg, rgba(30,52,86,.82), rgba(14,24,40,.82));
+      border-color: rgba(140,195,255,.30);
+      box-shadow:
+        0 10px 28px rgba(0,0,0,.35),
+        inset 0 0 0 1px rgba(0,0,0,.35);
+    }
+
+    .left{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .label{
+      font-weight:800;
+      letter-spacing:.6px;
+      font-size:12px;
+      text-transform:uppercase;
+      opacity:.95;
+    }
+    .value{
+      font-size:13px;
+      color:var(--muted);
+    }
+    .pill{
+      font-size:12px;
+      color:rgba(255,255,255,.78);
+      opacity:.85;
+    }
+
+    .foot{
+      padding:14px 16px 16px;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:rgba(242,246,255,.60);
+      font-size:12px;
+      text-align:center;
+      letter-spacing:.2px;
+    }
+
+    /* Optional: make it look “tighter” on very small screens */
+    @media (max-width: 360px){
+      .brand h1{font-size:18px}
+      .name{font-size:20px}
+    }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="card">
-      <div class="hero">
-        <h1>RUOFF & SONS</h1>
-        <div class="sub">ISO 9001:2015 Certified<br/>Precision CNC Machining<br/>Defense & Industrial Applications</div>
+  <div class="bg">
+    <div class="wrap">
+
+      <div class="top">
+        <!-- If you want your logo in the top-left, upload "logo.png" and uncomment the img line -->
+        <div class="logo">
+          <!-- <img src="logo.png" alt="Ruoff Logo" /> -->
+          <span style="font-weight:900;color:rgba(255,255,255,.75);">R</span>
+        </div>
+
+        <div class="brand">
+          <h1>RUOFF &amp; SONS</h1>
+          <p class="sub">
+            ISO 9001:2015 Certified<br/>
+            Precision CNC Machining<br/>
+            Defense &amp; Industrial Applications
+          </p>
+        </div>
       </div>
 
-      <div class="who">
-        <p class="name">Robert Kaizar</p>
-        <p class="title">President</p>
+      <div class="card">
+        <div class="who">
+          <p class="name">Robert Kaizar</p>
+          <p class="title">President</p>
+        </div>
+
+        <div class="btns">
+          <a class="btn primary" href="robert-kaizar.vcf" download>
+            <span class="left">
+              <span class="label">Save Contact</span>
+              <span class="value">Downloads contact card</span>
+            </span>
+            <span class="pill">.VCF</span>
+          </a>
+
+          <a class="btn" href="tel:+144355108233">
+            <span class="left">
+              <span class="label">Call Robert</span>
+              <span class="value">(443) 551-08233</span>
+            </span>
+            <span class="pill">Tap to dial</span>
+          </a>
+
+          <a class="btn" href="mailto:robert@ruoffandsons.com">
+            <span class="left">
+              <span class="label">Email Robert</span>
+              <span class="value">robert@ruoffandsons.com</span>
+            </span>
+            <span class="pill">Compose</span>
+          </a>
+
+          <a class="btn" href="https://www.ruoffandsons.com" target="_blank" rel="noopener">
+            <span class="left">
+              <span class="label">Visit Website</span>
+              <span class="value">ruoffandsons.com</span>
+            </span>
+            <span class="pill">Open</span>
+          </a>
+
+          <a class="btn" href="https://www.linkedin.com/in/robert-kaizar-9321b630/" target="_blank" rel="noopener">
+            <span class="left">
+              <span class="label">Connect on LinkedIn</span>
+              <span class="value">LinkedIn profile</span>
+            </span>
+            <span class="pill">Connect</span>
+          </a>
+        </div>
+
+        <div class="foot">
+          Documented Process • Controlled Tolerances • On-Time Execution
+        </div>
       </div>
 
-      <div class="btns">
-        <!-- Replace FILE.vcf with your real VCF file name once uploaded -->
-        <a class="btn primary" href="robert-kaizar.vcf" download>Save Contact <span class="meta">.VCF</span></a>
-
-        <a class="btn" href="tel:+144355108233">Call <span class="meta">(443) 551-08233</span></a>
-        <a class="btn" href="mailto:robert@ruoffandsons.com">Email <span class="meta">robert@ruoffandsons.com</span></a>
-        <a class="btn" href="https://www.ruoffandsons.com" target="_blank" rel="noopener">Website <span class="meta">ruoffandsons.com</span></a>
-        <a class="btn" href="https://www.linkedin.com/in/robert-kaizar-9321b630/" target="_blank" rel="noopener">LinkedIn <span class="meta">Connect</span></a>
-      </div>
-
-      <div class="foot">
-        Documented Process • Controlled Tolerances • On-Time Execution
-      </div>
     </div>
   </div>
 </body>
 </html>
+
