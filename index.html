@@ -1,239 +1,162 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Kaizar | Ruoff & Sons</title>
 
 <style>
-:root{
-  --ink: rgba(255,255,255,.96);
-  --muted: rgba(255,255,255,.72);
-  --stroke: rgba(255,255,255,.10);
-  --btnTop: rgba(22,40,70,.86);
-  --btnBot: rgba(10,18,32,.90);
-  --accent: rgba(120,180,255,.30);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
 }
 
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
-  background:#03070d;
-  color:var(--ink);
+html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-.page{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
+body {
+    background: linear-gradient(rgba(5,15,25,0.85), rgba(5,15,25,0.95)),
+                url('hero.jpg') center center / cover no-repeat;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* HERO TAKES EXTRA SPACE — NOT THE BUTTONS */
-.hero{
-  flex:1 1 auto;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-
-  padding:
-    calc(18px + env(safe-area-inset-top))
-    20px
-    26px;
-
-  background:
-    radial-gradient(900px 520px at 30% 20%, rgba(60,120,210,.18), rgba(0,0,0,0) 60%),
-    linear-gradient(to bottom,
-      rgba(0,0,0,.68) 0%,
-      rgba(0,0,0,.42) 40%,
-      rgba(0,0,0,.82) 100%
-    ),
-    url("hero.png");
-
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
+.container {
+    width: 100%;
+    max-width: 460px;
+    padding: 24px;
 }
 
-/* BRAND BLOCK */
-.brand{
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-  max-width:420px;
-  text-shadow:0 10px 30px rgba(0,0,0,.55);
+.header {
+    text-align: left;
+    margin-bottom: 30px;
 }
 
-.logo{
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.10);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
+.logo {
+    width: 65px;
+    margin-bottom: 14px;
 }
 
-.logo span{
-  font-weight:900;
-  color:rgba(255,255,255,.75);
+.company {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-.brand h1{
-  margin:0 0 6px;
-  font-size:22px;
-  letter-spacing:.9px;
-  font-weight:900;
-  text-transform:uppercase;
+.subline {
+    font-size: 14px;
+    opacity: .75;
+    margin-top: 6px;
+    line-height: 1.4;
 }
 
-.brand p{
-  margin:0;
-  font-size:12.5px;
-  line-height:1.45;
-  color:var(--muted);
+.name {
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 22px;
 }
 
-.nameblock{
-  margin-top:14px;
+.title {
+    opacity: .75;
+    margin-top: 6px;
+    margin-bottom: 25px;
 }
 
-.nameblock h2{
-  margin:0;
-  font-size:20px;
-  font-weight:900;
+.button {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: linear-gradient(135deg, rgba(0,145,165,.30), rgba(0,95,110,.30));
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.nameblock span{
-  display:block;
-  margin-top:5px;
-  font-size:13px;
-  color:var(--muted);
+.button.primary {
+    background: linear-gradient(135deg, rgba(0,185,200,.40), rgba(0,115,130,.40));
+    border: 1px solid rgba(0,220,240,.5);
 }
 
-/* BUTTON STACK — DOES NOT STRETCH */
-.actions{
-  flex:0 0 auto;
-  padding:14px 16px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+.button span:last-child {
+    opacity: .65;
+    font-size: 13px;
 }
 
-a.btn{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  text-decoration:none;
-  color:var(--ink);
-
-  padding:14px 16px;
-  border-radius:16px;
-
-  background:linear-gradient(180deg,var(--btnTop),var(--btnBot));
-  border:1px solid var(--stroke);
-
-  box-shadow:
-    0 14px 36px rgba(0,0,0,.65),
-    inset 0 0 0 1px rgba(0,0,0,.25);
-
-  font-weight:800;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-
-  transition:transform .08s ease;
-}
-
-a.btn:active{
-  transform:scale(.985);
-}
-
-a.btn.primary{
-  border-color:var(--accent);
-}
-
-.small{
-  font-size:12px;
-  color:rgba(255,255,255,.70);
-  text-transform:none;
-  font-weight:700;
-}
-
-.footer{
-  flex:0 0 auto;
-  text-align:center;
-  padding:
-    10px 16px
-    calc(16px + env(safe-area-inset-bottom));
-  font-size:11.5px;
-  color:rgba(255,255,255,.45);
+.footer {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    opacity: .6;
+    letter-spacing: .5px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="page">
+<div class="container">
 
-  <div class="hero">
-    <div class="brand">
-      <div class="logo">
-        <span>R</span>
-      </div>
-
-      <div>
-        <h1>RUOFF &amp; SONS</h1>
-        <p>
-          ISO 9001:2015 Certified<br>
-          Precision CNC Machining<br>
-          Defense &amp; Industrial Applications
-        </p>
-
-        <div class="nameblock">
-          <h2>Robert Kaizar</h2>
-          <span>President</span>
+    <div class="header">
+        <img src="ruoff_turquoise_logo.png" class="logo">
+        
+        <div class="company">RUOFF & SONS</div>
+        <div class="subline">
+            ISO 9001:2015 Certified<br>
+            Precision CNC Machining<br>
+            Defense & Industrial Applications
         </div>
-      </div>
+
+        <div class="name">Robert Kaizar</div>
+        <div class="title">President</div>
     </div>
-  </div>
 
-  <div class="actions">
-
-    <a class="btn primary" href="robert-kaizar.vcf" download>
-      <span>Save Contact</span>
-      <span class="small">.VCF</span>
+    <a class="button primary" href="Robert_Kaizar.vcf">
+        <span>SAVE CONTACT</span>
+        <span>.VCF</span>
     </a>
 
-    <a class="btn" href="tel:+14435108233">
-      <span>Call Robert</span>
-      <span class="small">(443) 510-8233</span>
+    <a class="button" href="tel:+144355108233">
+        <span>CALL ROBERT</span>
+        <span>(443) 551-08233</span>
     </a>
 
-    <a class="btn" href="mailto:robert@ruoffandsons.com">
-      <span>Email Robert</span>
-      <span class="small">robert@ruoffandsons.com</span>
+    <a class="button" href="mailto:robert@ruoffandsons.com">
+        <span>EMAIL ROBERT</span>
+        <span>Compose</span>
     </a>
 
-    <a class="btn" href="https://www.ruoffandsons.com" target="_blank">
-      <span>Visit Website</span>
-      <span class="small">Open</span>
+    <a class="button" href="https://ruoffandsons.com">
+        <span>VISIT WEBSITE</span>
+        <span>Open</span>
     </a>
 
-    <a class="btn" href="https://www.linkedin.com/in/robert-kaizar-9321b630/" target="_blank">
-      <span>Connect on LinkedIn</span>
-      <span class="small">Connect</span>
+    <a class="button" href="https://linkedin.com/in/robert-kaizar-9321b630/">
+        <span>CONNECT ON LINKEDIN</span>
+        <span>Connect</span>
     </a>
 
-  </div>
+</div>
 
-  <div class="footer">
+<div class="footer">
     Documented Process • Controlled Tolerances • On-Time Execution
-  </div>
-
 </div>
 
 </body>
 </html>
+
