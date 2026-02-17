@@ -8,10 +8,10 @@
   <style>
     :root{
       --ink: rgba(255,255,255,.96);
-      --muted: rgba(255,255,255,.70);
+      --muted: rgba(255,255,255,.78);
       --stroke: rgba(255,255,255,.12);
 
-      /* Ruoff turquoise vibe (not neon) */
+      /* Ruoff turquoise vibe */
       --tealA: rgba(0, 190, 205, .38);
       --tealB: rgba(0, 120, 140, .38);
       --tealStrongA: rgba(0, 210, 225, .48);
@@ -22,14 +22,12 @@
     *{ box-sizing:border-box; margin:0; padding:0; -webkit-font-smoothing: antialiased; }
     html, body{ height:100%; background:#050a10; }
 
-    /* Use modern mobile viewport so Safari UI doesn't create gaps */
     .page{
-      min-height: 100dvh;
+      min-height: 100dvh; /* key mobile fix */
       display:flex;
       flex-direction:column;
     }
 
-    /* HERO eats extra space (prevents bottom gaps) */
     .hero{
       flex:1 1 auto;
       display:flex;
@@ -41,7 +39,7 @@
         20px
         18px;
 
-      /* Lighter directional overlay so hero is visible again */
+      /* overlay tuned so hero shows */
       background:
         linear-gradient(
           to bottom,
@@ -59,9 +57,9 @@
 
     .brand{
       max-width: 420px;
-      text-shadow: 0 10px 30px rgba(0,0,0,.55);
     }
 
+    /* PREMIUM LOGO PLATE */
     .logo{
       width: 56px;
       height: 56px;
@@ -72,46 +70,59 @@
       justify-content:center;
       margin-bottom: 10px;
 
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
-      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(8px);
+
+      box-shadow:
+        0 16px 40px rgba(0,0,0,.60),
+        0 0 0 1px rgba(0,235,255,.10) inset;
     }
 
     .logo img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* logo is a square badge */
+      width:100%;
+      height:100%;
+      object-fit:cover;
       display:block;
+
+      /* helps darker logo read on dark hero */
+      filter: brightness(1.15) contrast(1.15);
     }
 
+    /* FORCE WHITE / READABLE BRAND TEXT */
     .company{
       font-size: 22px;
       font-weight: 900;
       letter-spacing: 1.0px;
       text-transform: uppercase;
       margin-bottom: 6px;
+      color: #ffffff;
+      text-shadow: 0 8px 24px rgba(0,0,0,.65);
     }
 
     .subline{
       font-size: 13.5px;
       line-height: 1.45;
-      color: var(--muted);
+      color: rgba(255,255,255,.78);
       margin-bottom: 16px;
+      text-shadow: 0 8px 22px rgba(0,0,0,.55);
     }
 
     .name{
       font-size: 26px;
       font-weight: 900;
       margin-bottom: 4px;
+      color: #ffffff;
+      text-shadow: 0 8px 24px rgba(0,0,0,.65);
     }
 
     .title{
       font-size: 14px;
-      color: var(--muted);
+      color: rgba(255,255,255,.75);
       margin-bottom: 6px;
+      text-shadow: 0 8px 22px rgba(0,0,0,.55);
     }
 
-    /* ACTIONS are fixed-size, do not stretch */
     .actions{
       flex:0 0 auto;
       padding: 14px 16px 10px;
@@ -129,7 +140,7 @@
       align-items:center;
       justify-content:space-between;
 
-      padding: 14px 16px;     /* tuned to fit on iPhones */
+      padding: 14px 16px;
       border-radius: 16px;
       border: 1px solid var(--stroke);
 
@@ -161,7 +172,6 @@
       font-size: 12.5px;
       font-weight: 800;
       color: rgba(255,255,255,.70);
-      letter-spacing: 0;
       text-transform:none;
     }
 
@@ -177,9 +187,8 @@
       background: rgba(0,0,0,.55);
     }
 
-    /* On very small heights, allow scroll instead of clipping */
+    /* If the phone is extremely short, allow scroll instead of clipping */
     @media (max-height: 740px){
-      .page{ min-height: 100dvh; }
       body{ overflow:auto; }
     }
   </style>
