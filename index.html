@@ -1,162 +1,243 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robert Kaizar | Ruoff & Sons</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Robert Kaizar | Ruoff & Sons</title>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-}
+  <style>
+    :root{
+      --ink: rgba(255,255,255,.96);
+      --muted: rgba(255,255,255,.70);
+      --stroke: rgba(255,255,255,.12);
 
-html, body {
-    height: 100%;
-    overflow: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
+      /* Ruoff turquoise vibe (not neon) */
+      --tealA: rgba(0, 190, 205, .38);
+      --tealB: rgba(0, 120, 140, .38);
+      --tealStrongA: rgba(0, 210, 225, .48);
+      --tealStrongB: rgba(0, 135, 155, .48);
+      --tealStroke: rgba(0, 235, 255, .55);
+    }
 
-body {
-    background: linear-gradient(rgba(5,15,25,0.85), rgba(5,15,25,0.95)),
-                url('hero.jpg') center center / cover no-repeat;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    *{ box-sizing:border-box; margin:0; padding:0; -webkit-font-smoothing: antialiased; }
+    html, body{ height:100%; background:#050a10; }
 
-.container {
-    width: 100%;
-    max-width: 460px;
-    padding: 24px;
-}
+    /* Use modern mobile viewport so Safari UI doesn't create gaps */
+    .page{
+      min-height: 100dvh;
+      display:flex;
+      flex-direction:column;
+    }
 
-.header {
-    text-align: left;
-    margin-bottom: 30px;
-}
+    /* HERO eats extra space (prevents bottom gaps) */
+    .hero{
+      flex:1 1 auto;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
 
-.logo {
-    width: 65px;
-    margin-bottom: 14px;
-}
+      padding:
+        calc(18px + env(safe-area-inset-top))
+        20px
+        18px;
 
-.company {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
+      /* Lighter directional overlay so hero is visible again */
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(6,18,30,.52) 0%,
+          rgba(6,18,30,.42) 35%,
+          rgba(6,18,30,.68) 78%,
+          rgba(6,18,30,.82) 100%
+        ),
+        url("hero.jpg");
 
-.subline {
-    font-size: 14px;
-    opacity: .75;
-    margin-top: 6px;
-    line-height: 1.4;
-}
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
 
-.name {
-    font-size: 26px;
-    font-weight: 700;
-    margin-top: 22px;
-}
+    .brand{
+      max-width: 420px;
+      text-shadow: 0 10px 30px rgba(0,0,0,.55);
+    }
 
-.title {
-    opacity: .75;
-    margin-top: 6px;
-    margin-bottom: 25px;
-}
+    .logo{
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      overflow:hidden;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom: 10px;
 
-.button {
-    width: 100%;
-    padding: 16px;
-    margin-bottom: 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: linear-gradient(135deg, rgba(0,145,165,.30), rgba(0,95,110,.30));
-    backdrop-filter: blur(10px);
-    color: white;
-    font-size: 16px;
-    text-decoration: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(6px);
+    }
 
-.button.primary {
-    background: linear-gradient(135deg, rgba(0,185,200,.40), rgba(0,115,130,.40));
-    border: 1px solid rgba(0,220,240,.5);
-}
+    .logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* logo is a square badge */
+      display:block;
+    }
 
-.button span:last-child {
-    opacity: .65;
-    font-size: 13px;
-}
+    .company{
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 1.0px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
 
-.footer {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 12px;
-    opacity: .6;
-    letter-spacing: .5px;
-}
-</style>
+    .subline{
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .name{
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .title{
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    /* ACTIONS are fixed-size, do not stretch */
+    .actions{
+      flex:0 0 auto;
+      padding: 14px 16px 10px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      background: linear-gradient(to bottom, rgba(0,0,0,.00), rgba(0,0,0,.55));
+    }
+
+    a.btn{
+      text-decoration:none;
+      color: var(--ink);
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      padding: 14px 16px;     /* tuned to fit on iPhones */
+      border-radius: 16px;
+      border: 1px solid var(--stroke);
+
+      background: linear-gradient(135deg, var(--tealA), var(--tealB));
+      backdrop-filter: blur(10px);
+
+      box-shadow:
+        0 14px 36px rgba(0,0,0,.60),
+        inset 0 0 0 1px rgba(0,0,0,.18);
+
+      font-weight: 900;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+
+      transition: transform .08s ease;
+    }
+
+    a.btn:active{ transform: scale(.987); }
+
+    a.btn.primary{
+      background: linear-gradient(135deg, var(--tealStrongA), var(--tealStrongB));
+      border-color: var(--tealStroke);
+      box-shadow:
+        0 16px 40px rgba(0,0,0,.62),
+        0 0 0 1px rgba(0,235,255,.12) inset;
+    }
+
+    .meta{
+      font-size: 12.5px;
+      font-weight: 800;
+      color: rgba(255,255,255,.70);
+      letter-spacing: 0;
+      text-transform:none;
+    }
+
+    .footer{
+      flex:0 0 auto;
+      text-align:center;
+      padding:
+        8px 16px
+        calc(16px + env(safe-area-inset-bottom));
+      font-size: 11.5px;
+      color: rgba(255,255,255,.45);
+      letter-spacing: .4px;
+      background: rgba(0,0,0,.55);
+    }
+
+    /* On very small heights, allow scroll instead of clipping */
+    @media (max-height: 740px){
+      .page{ min-height: 100dvh; }
+      body{ overflow:auto; }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="page">
 
-<div class="container">
+    <section class="hero">
+      <div class="brand">
+        <div class="logo">
+          <img src="logo.png" alt="Ruoff & Sons Logo">
+        </div>
 
-    <div class="header">
-        <img src="ruoff_turquoise_logo.png" class="logo">
-        
-        <div class="company">RUOFF & SONS</div>
+        <div class="company">RUOFF &amp; SONS</div>
         <div class="subline">
-            ISO 9001:2015 Certified<br>
-            Precision CNC Machining<br>
-            Defense & Industrial Applications
+          ISO 9001:2015 Certified<br>
+          Precision CNC Machining<br>
+          Defense &amp; Industrial Applications
         </div>
 
         <div class="name">Robert Kaizar</div>
         <div class="title">President</div>
-    </div>
+      </div>
+    </section>
 
-    <a class="button primary" href="Robert_Kaizar.vcf">
-        <span>SAVE CONTACT</span>
-        <span>.VCF</span>
-    </a>
+    <section class="actions">
+      <a class="btn primary" href="Robert_Kaizar.vcf" download>
+        <span>Save Contact</span>
+        <span class="meta">.VCF</span>
+      </a>
 
-    <a class="button" href="tel:+144355108233">
-        <span>CALL ROBERT</span>
-        <span>(443) 551-08233</span>
-    </a>
+      <a class="btn" href="tel:+14435108233">
+        <span>Call Robert</span>
+        <span class="meta">(443) 510-8233</span>
+      </a>
 
-    <a class="button" href="mailto:robert@ruoffandsons.com">
-        <span>EMAIL ROBERT</span>
-        <span>Compose</span>
-    </a>
+      <a class="btn" href="mailto:robert@ruoffandsons.com">
+        <span>Email Robert</span>
+        <span class="meta">Compose</span>
+      </a>
 
-    <a class="button" href="https://ruoffandsons.com">
-        <span>VISIT WEBSITE</span>
-        <span>Open</span>
-    </a>
+      <a class="btn" href="https://www.ruoffandsons.com" target="_blank" rel="noopener">
+        <span>Visit Website</span>
+        <span class="meta">Open</span>
+      </a>
 
-    <a class="button" href="https://linkedin.com/in/robert-kaizar-9321b630/">
-        <span>CONNECT ON LINKEDIN</span>
-        <span>Connect</span>
-    </a>
+      <a class="btn" href="https://www.linkedin.com/in/robert-kaizar-9321b630/" target="_blank" rel="noopener">
+        <span>Connect on LinkedIn</span>
+        <span class="meta">Connect</span>
+      </a>
+    </section>
 
-</div>
+    <footer class="footer">
+      Documented Process • Controlled Tolerances • On-Time Execution
+    </footer>
 
-<div class="footer">
-    Documented Process • Controlled Tolerances • On-Time Execution
-</div>
-
+  </div>
 </body>
 </html>
 
